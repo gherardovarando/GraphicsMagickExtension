@@ -1,0 +1,30 @@
+{
+  "name": "graphicsmagick",
+  "version": "0.0.1",
+  "description": "GraphicsMagick Extension for Atlas app",
+  "main": "GraphicsMagickExtension.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjuez/GraphicsMagickExtension.git"
+  },
+  "keywords": [
+    "GraphicsMagick",
+    "Atlas",
+    "cig",
+    "hbp"
+  ],
+  "author": "Mario Juez, Gherardo Varando",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/mjuez/GraphicsMagickExtension/issues"
+  },
+  "homepage": "https://github.com/mjuez/GraphicsMagickExtension#readme",
+  "dependencies": {
+    "electron": "^1.6.2",
+    "gm": "^1.23.0",
+    "electrongui": "github:gherardovarando/electrongui"
+  }
+}
