@@ -37,7 +37,6 @@ const {
     Grid,
     ToggleElement,
     Modal,
-    input,
     util,
     gui
 } = require('electrongui');
@@ -162,7 +161,7 @@ class GraphicsMagickExtension extends GuiExtension {
         };
         this.pane.top.appendChild(this.canvas);
         this.appendMenu();
-        gm(2, 2, "#ddff99f3").stream((err) => {
+        gm(path.join(__dirname, "res", "img", "gm.png")).identify((err) => {
             if (err) {
                 gui.notify(`Error loading GraphicsMagick extension, probably you need to install graphicsMagick in your system`);
                 this.deactivate();
