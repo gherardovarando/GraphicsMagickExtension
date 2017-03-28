@@ -23,9 +23,7 @@ const gm = require('gm');
 const path = require('path');
 const nativeImage = require('electron').nativeImage;
 const {
-    dialog,
-    Menu,
-    MenuItem
+    dialog
 } = require('electron').remote;
 const {
     SplitPane,
@@ -33,9 +31,7 @@ const {
     Task,
     ButtonsContainer,
     GuiExtension,
-    FolderSelector,
     Grid,
-    ToggleElement,
     Modal,
     util,
     gui
