@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mjuez/GraphicsMagickExtension.git"
+    "url": "git+https://github.com/gherardovarando/GraphicsMagickExtension.git"
   },
   "keywords": [
     "GraphicsMagick",
@@ -19,9 +19,9 @@
   "author": "Mario Juez, Gherardo Varando",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/mjuez/GraphicsMagickExtension/issues"
+    "url": "https://github.com/gherardovarando/GraphicsMagickExtension/issues"
   },
-  "homepage": "https://github.com/mjuez/GraphicsMagickExtension#readme",
+  "homepage": "https://github.com/gherardovarando/GraphicsMagickExtension#readme",
   "dependencies": {
     "gm": "*",
     "electrongui": "*"

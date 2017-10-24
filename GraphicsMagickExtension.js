@@ -8,7 +8,7 @@
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    but WITHOUT ANY WARRANTY without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
@@ -18,13 +18,13 @@
 
  */
 
-'use strict';
-const gm = require('gm');
-const path = require('path');
-const nativeImage = require('electron').nativeImage;
+'use strict'
+const gm = require('gm')
+const path = require('path')
+const nativeImage = require('electron').nativeImage
 const {
   dialog
-} = require('electron').remote;
+} = require('electron').remote
 const {
   SplitPane,
   Task,
@@ -33,8 +33,8 @@ const {
   Grid,
   Modal,
   util
-} = require('electrongui');
-const TreeList = require('electrongui').TreeList.TreeList;
+} = require('electrongui')
+const TreeList = require('electrongui').TreeList.TreeList
 
 class GraphicsMagickExtension extends GuiExtension {
 
@@ -45,25 +45,25 @@ class GraphicsMagickExtension extends GuiExtension {
       menuTemplate: [{
         label: 'Open image',
         click: () => {
-          this.open();
+          this.open()
         }
       }, {
         label: 'Display image',
         click: () => {
-          this.disp();
+          this.disp()
         }
       }, {
         label: 'Convert image',
         click: () => {
-          this.convert();
+          this.convert()
         }
       }, {
         label: 'Analyze image',
         click: () => {
-          this.analyze();
+          this.analyze()
         }
       }]
-    });
+    })
     this.writableFormats = [{
         name: 'JPG',
         extensions: ['jpg']
@@ -100,7 +100,7 @@ class GraphicsMagickExtension extends GuiExtension {
         name: 'TEXT',
         extensions: ['txt']
       }
-    ];
+    ]
     let Rf = ['jpg', 'png', 'gif', 'tif', 'tiff', 'bmp', 'art', 'avs',
       'cals', 'cin', 'cgm', 'cmyk', 'cur', 'cut', 'dcm', 'dcx',
       'dib', 'dpx', 'emf', 'epdf', 'epi', 'eps', 'epsf', 'epsi',
@@ -114,7 +114,7 @@ class GraphicsMagickExtension extends GuiExtension {
       'sfw', 'sgi', 'shtml', 'sun', 'tga', 'tim', 'ttf', 'txt',
       'uyvy', 'vicar', 'viff', 'wmf', 'wpg', 'xbm', 'xcf', 'xpm',
       'xwd', 'yuv'
-    ];
+    ]
     this.readableFormats = [{
         name: 'Images',
         extensions: Rf
@@ -123,53 +123,53 @@ class GraphicsMagickExtension extends GuiExtension {
         name: 'All files',
         extensions: ['*']
       }
-    ];
+    ]
   }
 
 
   activate() {
 
-    super.activate();
-    this.pane = new SplitPane(util.div('pane padded'));
-    this.appendChild(this.pane);
-    this.canvas = document.createElement('CANVAS');
-    this.canvas.width = 1000;
-    this.canvas.height = 1000;
+    super.activate()
+    this.pane = new SplitPane(util.div('pane padded'))
+    this.appendChild(this.pane)
+    this.canvas = document.createElement('CANVAS')
+    this.canvas.width = 1000
+    this.canvas.height = 1000
     this.cs = {
       size: 800,
       scale: 1,
       dx: 0,
       dy: 0
-    };
-    this.display = new Image();
-    let cnt = this.canvas.getContext('2d');
+    }
+    this.display = new Image()
+    let cnt = this.canvas.getContext('2d')
     this.display.onload = () => {
-      cnt.resetTransform();
+      cnt.resetTransform()
       this.cs = {
         size: 800,
         scale: 1,
         dx: 10,
         dy: 10
-      };
-      cnt.clearRect(0, 0, 800, 800);
-      cnt.drawImage(this.display, 10, 10);
-    };
-    this.pane.one.appendChild(this.canvas);
-    this.appendMenu();
+      }
+      cnt.clearRect(0, 0, 800, 800)
+      cnt.drawImage(this.display, 10, 10)
+    }
+    this.pane.one.appendChild(this.canvas)
+    this.appendMenu()
     gm(path.join(__dirname, "res", "img", "gm.png")).identify((err) => {
       if (err) {
-        thi.gui.alerts.add(`Error loading GraphicsMagick extension, probably you need to install graphicsMagick in your system`, 'warning');
-        this.deactivate();
+        thi.gui.alerts.add(`Error loading GraphicsMagick extension, probably you need to install graphicsMagick in your system`, 'warning')
+        this.deactivate()
       } else {
-        this.gui.alerts.add('GraphicsMagick extensions up and running','success');
+        this.gui.alerts.add('GraphicsMagick extensions up and running','success')
       }
-    });
+    })
   }
 
   deactivate() {
-    util.empty(this.element, this.element.firstChild);
-    this.removeMenu();
-    super.deactivate();
+    util.empty(this.element, this.element.firstChild)
+    this.removeMenu()
+    super.deactivate()
   }
 
   convert() {
@@ -179,23 +179,23 @@ class GraphicsMagickExtension extends GuiExtension {
       properties: ['openFile']
     }, (filenames) => {
       if (filenames) {
-        let file = filenames[0];
+        let file = filenames[0]
         let modal = new Modal({
           title: 'Converter GraphicsMagick',
           height: 'auto',
           width: '300px'
-        });
-        let body = util.div('pane padded');
-        let text = util.div();
-        text.innerHTML = `Analyzing ${path.basename(file)}...`;
+        })
+        let body = util.div('pane padded')
+        let text = util.div()
+        text.innerHTML = `Analyzing ${path.basename(file)}...`
         gm(file).format((err, value) => {
           if (err) {
-            text.innerHTML = `${path.basename(file)} has unknown format (gm error)`;
+            text.innerHTML = `${path.basename(file)} has unknown format (gm error)`
           } else {
-            text.innerHTML = `${path.basename(file)} has ${value} format, just click convert and choose the format of the output file`;
+            text.innerHTML = `${path.basename(file)} has ${value} format, just click convert and choose the format of the output file`
           }
-        });
-        body.appendChild(text);
+        })
+        body.appendChild(text)
         let footer = util.div('toolbar toolbar-footer')
         let btns = new ButtonsContainer(util.div('toolbar-actions'))
         btns.appendTo(footer)
@@ -204,7 +204,7 @@ class GraphicsMagickExtension extends GuiExtension {
           action: () => {
             modal.destroy()
           }
-        });
+        })
         btns.addButton({
           text: 'Convert',
           action: () => {
@@ -214,27 +214,27 @@ class GraphicsMagickExtension extends GuiExtension {
               },
               (filename) => {
                 if (filename) {
-                  modal.destroy();
-                  let task = new Task('GM converter', `input: ${path.basename(file)} output: ${path.basename(filename)}`);
-                  this.gui.taskManager.addTask(task);
-                  task.run();
+                  modal.destroy()
+                  let task = new Task('GM converter', `input: ${path.basename(file)} output: ${path.basename(filename)}`)
+                  this.gui.taskManager.addTask(task)
+                  task.run()
                   gm(file).write(filename, (err) => {
                     if (err) {
-                      task.fail();
+                      task.fail()
                     } else {
-                      task.success();
+                      task.success()
 
                     }
-                  });
+                  })
                 }
-              });
+              })
           }
-        });
-        modal.addBody(body);
-        modal.addFooter(footer);
-        modal.show();
+        })
+        modal.addBody(body)
+        modal.addFooter(footer)
+        modal.show()
       }
-    });
+    })
   }
 
   analyze() {
@@ -244,30 +244,30 @@ class GraphicsMagickExtension extends GuiExtension {
       properties: ['openFile']
     }, (filenames) => {
       if (filenames) {
-        let file = filenames[0];
+        let file = filenames[0]
         let modal = new Modal({
           title: 'Anlayzer GraphicsMagick',
           height: 'auto',
           width: 'auto'
-        });
+        })
         let body = util.div('pane')
-        let cont = util.div();
-        let text = util.div();
+        let cont = util.div()
+        let text = util.div()
         text.innerHTML = `Analyzing ${path.basename(file)}...`
         gm(file).identify((err, value) => {
           if (err) {
-            text.innerHTML = `${path.basename(file)} gm error`;
+            text.innerHTML = `${path.basename(file)} gm error`
           } else {
-            text.innerHTML = `${path.basename(file)}`;
-            let tree = new TreeList(cont, value, 'Info');
+            text.innerHTML = `${path.basename(file)}`
+            let tree = new TreeList(cont, value, 'Info')
           }
-        });
+        })
         body.appendChild(text)
         body.appendChild(cont)
-        modal.addBody(body);
-        modal.show();
+        modal.addBody(body)
+        modal.show()
       }
-    });
+    })
   }
 
 
@@ -278,9 +278,9 @@ class GraphicsMagickExtension extends GuiExtension {
       properties: ['openFile']
     }, (filenames) => {
       if (filenames) {
-        require('child_process').exec('gm display ' + filenames[0]);
+        require('child_process').exec('gm display ' + filenames[0])
       }
-    });
+    })
   }
 
 
@@ -293,32 +293,32 @@ class GraphicsMagickExtension extends GuiExtension {
       if (filenames) {
         gm(filenames[0]).toBuffer('PNG', (err, buffer) => {
           this.buffer = buffer
-          let img = nativeImage.createFromBuffer(buffer);
-          this.display.src = img.toDataURL();
-          this.show();
-        });
+          let img = nativeImage.createFromBuffer(buffer)
+          this.display.src = img.toDataURL()
+          this.show()
+        })
         gm(filenames[0]).identify((err, value) => {
-          let file = filenames[0];
+          let file = filenames[0]
           if (err) {
-            this.pane.two.innerHTML = `${path.basename(file)} gm error`;
+            this.pane.two.innerHTML = `${path.basename(file)} gm error`
           } else {
-            this.pane.two.innerHTML = `${path.basename(file)}`;
-            let tree = new TreeList(this.pane.two, value, 'Info');
-            this.pane.showBottom();
+            this.pane.two.innerHTML = `${path.basename(file)}`
+            let tree = new TreeList(this.pane.two, value, 'Info')
+            this.pane.showSecondPane()
           }
-        });
+        })
       }
-    });
+    })
   }
 
   zoomIn() {
-    this.canvas.scale(1.2, 1.2);
+    this.canvas.scale(1.2, 1.2)
   }
 
   zoomOut() {
-    this.canvas.scale(0.8, 0.8);
+    this.canvas.scale(0.8, 0.8)
   }
 
 }
 
-module.exports = GraphicsMagickExtension;
+module.exports = GraphicsMagickExtension
