@@ -23,8 +23,7 @@
   },
   "homepage": "https://github.com/mjuez/GraphicsMagickExtension#readme",
   "dependencies": {
-    "electron": "^1.6.2",
-    "gm": "^1.23.0",
-    "electrongui": "github:gherardovarando/electrongui"
+    "gm": "*",
+    "electrongui": "*"
   }
 }
