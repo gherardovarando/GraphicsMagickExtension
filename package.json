@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/gherardovarando/GraphicsMagickExtension#readme",
   "dependencies": {
-    "gm": "*",
-    "electrongui": "*"
+    "electrongui": "^0.5.11",
+    "gm": "*"
   }
 }

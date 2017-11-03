@@ -128,8 +128,6 @@ class GraphicsMagickExtension extends GuiExtension {
 
 
   activate() {
-
-    super.activate()
     this.pane = new SplitPane(util.div('pane padded'))
     this.appendChild(this.pane)
     this.canvas = document.createElement('CANVAS')
@@ -156,9 +154,10 @@ class GraphicsMagickExtension extends GuiExtension {
     }
     this.pane.one.appendChild(this.canvas)
     this.appendMenu()
+    super.activate()
     gm(path.join(__dirname, "res", "img", "gm.png")).identify((err) => {
       if (err) {
-        thi.gui.alerts.add(`Error loading GraphicsMagick extension, probably you need to install graphicsMagick in your system`, 'warning')
+        this.gui.alerts.add(`Error loading GraphicsMagick extension, probably you need to install graphicsMagick in your system`, 'warning')
         this.deactivate()
       } else {
         this.gui.alerts.add('GraphicsMagick extensions up and running','success')
