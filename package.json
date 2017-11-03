@@ -1,6 +1,6 @@
 {
   "name": "graphicsmagickextension",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "GraphicsMagick Extension for Atlas app",
   "main": "GraphicsMagickExtension.js",
   "scripts": {
